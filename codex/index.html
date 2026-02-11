@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>School Air Quality Impact Brief</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="bg-layer bg-layer--left" aria-hidden="true"></div>
+    <div class="bg-layer bg-layer--right" aria-hidden="true"></div>
+
+    <main class="page">
+      <header class="hero">
+        <p class="eyebrow">School Air Risk Snapshot · V1 Demo</p>
+        <h1 id="headline"></h1>
+        <p class="subhead" id="subhead"></p>
+      </header>
+
+      <section class="controls card">
+        <div>
+          <h2>Student Count Dial</h2>
+          <p>
+            Adjust this for your school or district. The model recalculates estimated impact in real time.
+          </p>
+        </div>
+        <div class="dial-wrap">
+          <label for="studentsRange">Students served</label>
+          <input id="studentsRange" type="range" />
+          <div class="dial-meta">
+            <input id="studentsInput" type="number" inputmode="numeric" />
+            <span>students</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="split-view" aria-label="Comparison">
+        <article class="panel panel--risk">
+          <h3>No Classroom Purification</h3>
+          <p class="panel-copy">Every school day, preventable exposure keeps hurting attendance and learning.</p>
+
+          <div class="stat-grid">
+            <div class="stat card card--danger">
+              <p class="stat-label">Student absence days / year</p>
+              <p class="stat-value" data-value="noStudentAbsences"></p>
+            </div>
+            <div class="stat card card--danger">
+              <p class="stat-label">Teacher illness absences / year</p>
+              <p class="stat-value" data-value="noTeacherIllness"></p>
+            </div>
+            <div class="stat card card--danger">
+              <p class="stat-label">Instructional hours lost</p>
+              <p class="stat-value" data-value="noInstructionHoursLost"></p>
+            </div>
+            <div class="stat card card--danger">
+              <p class="stat-label">Behavior incident pressure</p>
+              <p class="stat-value" data-value="noBehaviorIndex"></p>
+            </div>
+          </div>
+
+          <div class="timer card card--danger-soft" aria-live="polite">
+            <p class="timer-title">Next preventable absence likely in</p>
+            <p class="timer-value" id="countdown">--:--</p>
+            <p class="timer-note" id="countdownNote"></p>
+          </div>
+        </article>
+
+        <article class="panel panel--clean">
+          <h3>With Classroom Purification</h3>
+          <p class="panel-copy">Cleaner air shifts outcomes quickly, and the gains compound through the year.</p>
+
+          <div class="stat-grid">
+            <div class="stat card card--success">
+              <p class="stat-label">Student absence days / year</p>
+              <p class="stat-value" data-value="yesStudentAbsences"></p>
+              <p class="delta" data-value="deltaStudentAbsences"></p>
+            </div>
+            <div class="stat card card--success">
+              <p class="stat-label">Teacher illness absences / year</p>
+              <p class="stat-value" data-value="yesTeacherIllness"></p>
+              <p class="delta" data-value="deltaTeacherIllness"></p>
+            </div>
+            <div class="stat card card--success">
+              <p class="stat-label">Instructional hours recovered</p>
+              <p class="stat-value" data-value="yesInstructionHoursRecovered"></p>
+              <p class="delta" data-value="deltaInstructionHoursRecovered"></p>
+            </div>
+            <div class="stat card card--success">
+              <p class="stat-label">Behavior incident pressure</p>
+              <p class="stat-value" data-value="yesBehaviorIndex"></p>
+              <p class="delta" data-value="deltaBehaviorIndex"></p>
+            </div>
+          </div>
+
+          <div class="score-impact card card--success-soft">
+            <p class="score-title">Same-day test performance signal</p>
+            <p class="score-value" data-value="testScoreGain"></p>
+            <p class="score-note" id="testScoreNarrative"></p>
+          </div>
+        </article>
+      </section>
+
+      <section class="downstream card">
+        <h2>Downstream Effects Administrators Usually Feel First</h2>
+        <div class="downstream-grid">
+          <div>
+            <h4>Health-sensitive students</h4>
+            <p data-value="asthmaStudents"></p>
+          </div>
+          <div>
+            <h4>Health-related chronic absenteeism risk</h4>
+            <p data-value="healthChronicStudents"></p>
+          </div>
+          <div>
+            <h4>Substitute coverage pressure</h4>
+            <p data-value="subCoverageDays"></p>
+          </div>
+          <div>
+            <h4>Learning disruption avoided</h4>
+            <p data-value="learningDaysSaved"></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="assumptions card">
+        <h2>Model Assumptions (Editable)</h2>
+        <p>
+          These values are loaded from <code>assumptions.js</code>. Update that file to tune this brief as more local data comes in.
+        </p>
+        <div id="assumptionsTable" class="assumption-table"></div>
+      </section>
+
+      <section class="sources card">
+        <h2>Research Sources</h2>
+        <ol id="sourcesList"></ol>
+      </section>
+    </main>
+
+    <script src="./assumptions.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

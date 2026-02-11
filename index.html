@@ -591,6 +591,15 @@ input[type="range"]::-moz-range-thumb {
   color: var(--text);
   font-weight: 500;
 }
+.sources-list a {
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(212,165,71,0.3);
+  transition: border-color 0.2s;
+}
+.sources-list a:hover {
+  border-color: var(--gold);
+}
 
 /* ── FOOTER ── */
 .footer {
@@ -838,15 +847,16 @@ input[type="range"]::-moz-range-thumb {
   </button>
   <div class="sources-list" id="sourcesList">
     <ol>
-      <li><strong>Gilraine, M. (2023).</strong> "Air Filters, Pollution, and Student Achievement." EdWorkingPapers. Found 0.1–0.2 SD increase in test scores (~3 months of additional learning) after air purifier installation in Aliso Canyon, CA schools.</li>
-      <li><strong>Renna et al. (2025).</strong> RFF Working Paper 25-17. First RCT of air purifiers in Milan primary schools. Found 12.5% reduction in student absenteeism (1.34 fewer missed days/student/year), PM2.5 reduced by 32%. Benefit-cost ratio of 9.62.</li>
-      <li><strong>Wargocki &amp; Wyon (1999).</strong> Swedish daycare study. Illness-related absences dropped 55% when electrostatic air cleaners were installed. Published in Indoor Air.</li>
-      <li><strong>SICAS-2 Trial.</strong> School Inner-City Asthma Intervention Study. 200 classrooms, 39 schools. Median absence rate: 8.8 days/year. Published in JAMA Network Open.</li>
-      <li><strong>U.S. EPA.</strong> Poor IAQ contributes to ~14 million missed school days annually from asthma. Indoor pollutant levels 2–5× higher than outdoor levels.</li>
-      <li><strong>CDC.</strong> Approximately 8% of school-age children have asthma — the leading cause of chronic-illness-related school absenteeism.</li>
-      <li><strong>Federici et al. (2018).</strong> Societal cost of a single school day missed due to illness: ~€102 (~$110 USD), including childcare, lost parental productivity, and healthcare.</li>
-      <li><strong>Harvard T.H. Chan School of Public Health (2016).</strong> Better air quality and ventilation associated with a 101% increase in cognitive function test scores across nine cognitive domains.</li>
-      <li><strong>Zang et al. (2023).</strong> Yale/JAMA Network Open. Tracked 2.8M students in NC (2001–2018). PM2.5 exposure negatively impacted standardized test scores even at levels below EPA standards.</li>
+      <li><a href="https://edworkingpapers.com/sites/default/files/Gilraine_AirFilters_1.pdf" target="_blank" rel="noopener"><strong>Gilraine, M. (2023).</strong></a> "Air Filters, Pollution, and Student Achievement." EdWorkingPapers. Found 0.1–0.2 SD increase in test scores (~3 months of additional learning) after air purifier installation in Aliso Canyon, CA schools.</li>
+      <li><a href="https://www.rff.org/documents/4900/WP_25-17.pdf" target="_blank" rel="noopener"><strong>Renna et al. (2025).</strong></a> RFF Working Paper 25-17. First RCT of air purifiers in Milan primary schools. Found 12.5% reduction in student absenteeism (1.34 fewer missed days/student/year), PM2.5 reduced by 32%. Benefit-cost ratio of 9.62.</li>
+      <li><a href="https://pubmed.ncbi.nlm.nih.gov/10507150/" target="_blank" rel="noopener"><strong>Wargocki &amp; Wyon (1999).</strong></a> Swedish daycare study. Illness-related absences dropped 55% when electrostatic air cleaners were installed. Published in Indoor Air.</li>
+      <li><a href="https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2839930" target="_blank" rel="noopener"><strong>SICAS-2 Trial.</strong></a> School Inner-City Asthma Intervention Study. 200 classrooms, 39 schools. Median absence rate: 8.8 days/year. Published in JAMA Network Open.</li>
+      <li><a href="https://www.epa.gov/iaq-schools/how-does-indoor-air-quality-impact-student-health-and-academic-performance" target="_blank" rel="noopener"><strong>U.S. EPA.</strong></a> Poor IAQ contributes to ~14 million missed school days annually from asthma. Indoor pollutant levels 2–5× higher than outdoor levels.</li>
+      <li><a href="https://www.cdc.gov/nchs/data/databriefs/db499.pdf" target="_blank" rel="noopener"><strong>CDC.</strong></a> Approximately 8% of school-age children have asthma — the leading cause of chronic-illness-related school absenteeism.</li>
+      <li><strong>Federici et al. (2018).</strong> Societal cost of a single school day missed due to illness: ~€102 (~$110 USD), including childcare, lost parental productivity, and healthcare. (Cited in RFF Paper.)</li>
+      <li><a href="https://cleanair.camfil.us/2025/04/24/everything-you-need-to-know-about-air-quality-in-k-12-schools-for-the-2024-2025-academic-year/" target="_blank" rel="noopener"><strong>Harvard T.H. Chan School of Public Health (2016).</strong></a> Better air quality and ventilation associated with a 101% increase in cognitive function test scores across nine cognitive domains.</li>
+      <li><a href="https://ysph.yale.edu/news-article/yale-study-polluted-air-can-negatively-impact-childrens-test-scores/" target="_blank" rel="noopener"><strong>Zang et al. (2023).</strong></a> Yale/JAMA Network Open. Tracked 2.8M students in NC (2001–2018). PM2.5 exposure negatively impacted standardized test scores even at levels below EPA standards.</li>
+      <li><a href="https://www.nber.org/papers/w33549" target="_blank" rel="noopener"><strong>NBER WP 33549 (2025).</strong></a> Links PM2.5 to higher student absences, teacher illness, and discipline referrals (+28% per +10µg/m³).</li>
       <li><strong>The 74 Million (2025).</strong> Air purifier costs: ~$1,000/classroom first year (~$30/student). Less than 1% of the cost of reducing class sizes for similar effect sizes.</li>
     </ol>
   </div>
