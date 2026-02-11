@@ -359,39 +359,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 /* ── DIAL INPUT ROW ── */
-.dial-input-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
-}
-.dial-input-row input[type="number"] {
-  width: 80px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(212,165,71,0.25);
-  border-radius: 6px;
-  color: var(--gold);
-  font-family: var(--sans);
-  font-size: 0.95rem;
-  font-weight: 600;
-  padding: 0.35rem 0.5rem;
-  text-align: center;
-  outline: none;
-}
-.dial-input-row input[type="number"]:focus {
-  border-color: var(--gold);
-}
-.dial-input-row span {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
-/* hide spinners */
-.dial-input-row input[type="number"]::-webkit-inner-spin-button,
-.dial-input-row input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none; margin: 0;
-}
-.dial-input-row input[type="number"] { -moz-appearance: textfield; }
+
 
 /* ── DOWNSTREAM SECTION ── */
 .downstream-section {
@@ -630,7 +598,7 @@ input[type="range"]::-moz-range-thumb {
   <h1 class="hero-school-name">Lincoln Heights Elementary School</h1>
   <div class="hero-admin">Prepared for Dr. Patricia Morales, Principal · Riverside Unified School District</div>
   <div class="hero-divider"></div>
-  <h2 class="hero-question">What is your school <em>breathing?</em></h2>
+  <h2 class="hero-question">What are your students <em>breathing?</em></h2>
   <p class="hero-sub">Every minute without air purification, your students inhale particulate matter that impairs their ability to learn, makes them sick, and sends ripple effects through their families.</p>
 </header>
 
@@ -640,10 +608,6 @@ input[type="range"]::-moz-range-thumb {
     <div class="dial-label">Number of Students in Your School</div>
     <div class="dial-value"><span class="dial-number" id="dialNumber">450</span><span>students</span></div>
     <input type="range" id="studentSlider" min="50" max="5000" value="2500" step="10">
-    <div class="dial-input-row">
-      <input type="number" id="studentInput" min="50" max="5000" value="2500" step="10">
-      <span>or type exact count</span>
-    </div>
     <div class="dial-range-labels">
       <span>50</span>
       <span>Single school ← → District-wide</span>
@@ -1211,18 +1175,12 @@ function setupAnimations() {
 // INIT
 // ═══════════════════════════════════════════════════════════════
 const slider = document.getElementById('studentSlider');
-const numInput = document.getElementById('studentInput');
 function setStudents(n) {
   n = Math.max(50, Math.min(5000, n));
   slider.value = n;
-  numInput.value = n;
   updatePage(n);
 }
 slider.addEventListener('input', () => setStudents(parseInt(slider.value)));
-numInput.addEventListener('input', () => {
-  const v = parseInt(numInput.value);
-  if (!isNaN(v)) setStudents(v);
-});
 
 updatePage(2500);
 setupAnimations();
@@ -1231,7 +1189,7 @@ requestAnimationFrame(tickCountdown);
 // Danger particles: dense, pathogen-shaped, drifting
 initParticles('dangerParticles', 'rgba(231,76,60,ALPHA)', 40, 0.3, 0.001, true);
 // Safe particles: barely there, harmless dots
-initParticles('safeParticles', 'rgba(46,204,113,ALPHA)', 4, 0.1, 0.006, false);
+initParticles('safeParticles', 'rgba(46,204,113,ALPHA)', 10, 0.15, 0.004, false);
 </script>
 </body>
 </html>
