@@ -348,6 +348,8 @@ input[type="range"]::-moz-range-thumb {
   font-weight: 700;
   text-align: right;
   min-width: 80px;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
 }
 .panel-danger .stat-value { color: #f0a8a0; }
 .panel-safe .stat-value { color: #a0f0b8; }
@@ -356,7 +358,10 @@ input[type="range"]::-moz-range-thumb {
   font-weight: 400;
   color: var(--text-muted);
   margin-left: 0.4rem;
+  display: inline-block;
+  text-align: left;
 }
+
 
 /* ── DIAL INPUT ROW ── */
 
@@ -405,6 +410,8 @@ input[type="range"]::-moz-range-thumb {
   font-weight: 700;
   color: var(--text);
   line-height: 1.2;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
 }
 .downstream-item .ds-value span {
   font-size: 0.85rem;
@@ -463,6 +470,7 @@ input[type="range"]::-moz-range-thumb {
   font-family: var(--serif);
   font-size: 2.2rem;
   color: var(--gold);
+  font-variant-numeric: tabular-nums;
 }
 .cost-stat-label {
   font-size: 0.85rem;
@@ -662,7 +670,7 @@ input[type="range"]::-moz-range-thumb {
             <span class="stat-value" id="d-test">—</span>
           </div>
           <div class="stat-row">
-            <span class="stat-label">Household infection risk</span>
+            <span class="stat-label">Students with household infection risk</span>
             <span class="stat-value" id="d-elderly">—</span>
           </div>
         </div>
@@ -692,35 +700,35 @@ input[type="range"]::-moz-range-thumb {
         <!-- Matched rows — line up 1:1 with the red panel -->
         <div class="stat-grid">
           <div class="stat-row">
-            <span class="stat-label">Student sick days / year</span>
+            <span class="stat-label">Fewer student sick days</span>
             <span class="stat-value" id="s-sickdays">—</span>
           </div>
           <div class="stat-row">
-            <span class="stat-label">Teacher sick days / year</span>
+            <span class="stat-label">Fewer teacher sick days</span>
             <span class="stat-value" id="s-teachersick">—</span>
           </div>
           <div class="stat-row">
-            <span class="stat-label">Substitute teacher costs</span>
+            <span class="stat-label">Substitute costs saved</span>
             <span class="stat-value" id="s-subcost">—</span>
           </div>
           <div class="stat-row">
-            <span class="stat-label">Asthma episodes / year</span>
+            <span class="stat-label">Asthma episodes prevented</span>
             <span class="stat-value" id="s-asthma">—</span>
           </div>
           <div class="stat-row">
-            <span class="stat-label">Learning days</span>
+            <span class="stat-label">Learning days recovered</span>
             <span class="stat-value" id="s-learning">—</span>
           </div>
           <div class="stat-row">
-            <span class="stat-label">Parent workdays</span>
+            <span class="stat-label">Parent workdays recovered</span>
             <span class="stat-value" id="s-parent">—</span>
           </div>
           <div class="stat-row">
-            <span class="stat-label">Test score gain</span>
+            <span class="stat-label">Test score gain (percentile pts)</span>
             <span class="stat-value" id="s-test">—</span>
           </div>
           <div class="stat-row">
-            <span class="stat-label">Household infections</span>
+            <span class="stat-label">Household infections stopped</span>
             <span class="stat-value" id="s-elderly">—</span>
           </div>
         </div>
@@ -773,7 +781,7 @@ input[type="range"]::-moz-range-thumb {
 <section class="cost-section animate-in">
   <div class="cost-card">
     <div class="cost-eyebrow">The Investment</div>
-    <h2 class="cost-headline">All of this for <em>$<span id="costPerStudent">30</span> per student</em> per year</h2>
+    <h2 class="cost-headline">All of this for <em>$<span id="costPerStudent">25</span> per student</em> per year</h2>
     <div class="cost-stats">
       <div class="cost-stat">
         <div class="cost-stat-value">$<span id="totalCost">—</span></div>
@@ -885,7 +893,7 @@ const A = {
   healthChronicAbsenceRate: 0.058,
 
   // ── Cost ──
-  costPerStudent: 30,              // Gilraine / The 74 estimate
+  costPerStudent: 25,              // Gilraine / The 74 estimate, adjusted for declining costs
   benefitCostRatio: 9.62,          // Italian RCT
 
   // ── School Calendar ──
@@ -976,24 +984,24 @@ function updatePage(students) {
   document.getElementById('dialNumber').textContent = fmt(students);
 
   // Danger side
-  document.getElementById('d-sickdays').innerHTML = fmt(d.sickDaysTotal) + '<span class="stat-unit">days</span>';
-  document.getElementById('d-teachersick').innerHTML = fmt(d.teacherSickTotal) + '<span class="stat-unit">days</span>';
-  document.getElementById('d-subcost').innerHTML = '$' + fmtMoney(d.subCost);
-  document.getElementById('d-asthma').innerHTML = fmt(d.asthmaAttacks) + '<span class="stat-unit">/yr</span>';
-  document.getElementById('d-learning').innerHTML = fmt(d.sickDaysTotal) + '<span class="stat-unit">days</span>';
-  document.getElementById('d-parent').innerHTML = fmt(d.parentDaysLost) + '<span class="stat-unit">days</span>';
-  document.getElementById('d-test').innerHTML = 'Baseline';
-  document.getElementById('d-elderly').innerHTML = fmt(d.elderlyExposed) + '<span class="stat-unit">students</span>';
+  document.getElementById('d-sickdays').textContent = fmt(d.sickDaysTotal);
+  document.getElementById('d-teachersick').textContent = fmt(d.teacherSickTotal);
+  document.getElementById('d-subcost').textContent = '$' + fmtMoney(d.subCost);
+  document.getElementById('d-asthma').textContent = fmt(d.asthmaAttacks);
+  document.getElementById('d-learning').textContent = fmt(d.sickDaysTotal);
+  document.getElementById('d-parent').textContent = fmt(d.parentDaysLost);
+  document.getElementById('d-test').textContent = 'Baseline';
+  document.getElementById('d-elderly').textContent = fmt(d.elderlyExposed);
 
   // Safe side — deltas as positive gains
-  document.getElementById('s-sickdays').innerHTML = fmt(d.sickDaysSaved) + '<span class="stat-unit">saved</span>';
-  document.getElementById('s-teachersick').innerHTML = fmt(d.teacherSickSaved) + '<span class="stat-unit">saved</span>';
-  document.getElementById('s-subcost').innerHTML = '$' + fmtMoney(d.subCostSaved) + '<span class="stat-unit">saved</span>';
-  document.getElementById('s-asthma').innerHTML = fmt(d.asthmaAttacksPrevented) + '<span class="stat-unit">prevented</span>';
-  document.getElementById('s-learning').innerHTML = fmt(d.sickDaysSaved) + '<span class="stat-unit">recovered</span>';
-  document.getElementById('s-parent').innerHTML = fmt(d.parentDaysSaved) + '<span class="stat-unit">recovered</span>';
-  document.getElementById('s-test').innerHTML = '+' + A.testScoreMonths + '<span class="stat-unit">mo. learning</span>';
-  document.getElementById('s-elderly').innerHTML = fmt(d.infectionsPrevented) + '<span class="stat-unit">stopped</span>';
+  document.getElementById('s-sickdays').textContent = fmt(d.sickDaysSaved);
+  document.getElementById('s-teachersick').textContent = fmt(d.teacherSickSaved);
+  document.getElementById('s-subcost').textContent = '$' + fmtMoney(d.subCostSaved);
+  document.getElementById('s-asthma').textContent = fmt(d.asthmaAttacksPrevented);
+  document.getElementById('s-learning').textContent = fmt(d.sickDaysSaved);
+  document.getElementById('s-parent').textContent = fmt(d.parentDaysSaved);
+  document.getElementById('s-test').textContent = '+4';
+  document.getElementById('s-elderly').textContent = fmt(d.infectionsPrevented);
 
   // Downstream
   document.getElementById('ds-hours').innerHTML = fmt(d.instructionalHoursLost) + '<span> hrs</span>';
