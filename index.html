@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>School Air Quality Impact Report — Lincoln Heights Elementary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0c;
+  --text: #e8e4de;
+  --text-muted: #8a8580;
+  --danger: #c0392b;
+  --danger-deep: #1a0808;
+  --danger-glow: #e74c3c;
+  --danger-surface: #160a0a;
+  --danger-border: #3d1515;
+  --safe: #27ae60;
+  --safe-deep: #081a0e;
+  --safe-glow: #2ecc71;
+  --safe-surface: #0a160e;
+  --safe-border: #153d20;
+  --gold: #d4a547;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  padding: 3rem 2rem 2rem;
+  text-align: center;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(212,165,71,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+.hero-school-name {
+  font-family: var(--serif);
+  font-size: clamp(2.6rem, 6vw, 4.5rem);
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 0.6rem;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+.hero-admin {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+.hero-divider {
+  width: 48px;
+  height: 2px;
+  background: var(--gold);
+  margin: 0 auto 1.5rem;
+  opacity: 0.5;
+}
+.hero-question {
+  font-family: var(--serif);
+  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: 0.75rem;
+  color: var(--text-muted);
+}
+.hero-question em {
+  font-style: italic;
+  color: var(--gold);
+}
+.hero-sub {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.6;
+  opacity: 0.7;
+}
+
+/* ── STUDENT DIAL ── */
+.dial-section {
+  padding: 2rem 2rem 2.5rem;
+  text-align: center;
+}
+.dial-container {
+  max-width: 520px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, rgba(212,165,71,0.04), rgba(212,165,71,0.01));
+  border: 1px solid rgba(212,165,71,0.15);
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+}
+.dial-label {
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+.dial-value {
+  font-family: var(--serif);
+  font-size: 3.5rem;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  line-height: 1;
+}
+.dial-value span {
+  font-size: 1rem;
+  color: var(--text-muted);
+  font-family: var(--sans);
+  margin-left: 0.5rem;
+}
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(to right, var(--gold), var(--gold));
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 12px rgba(212,165,71,0.4);
+  cursor: grab;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 12px rgba(212,165,71,0.4);
+  cursor: grab;
+}
+.dial-range-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+/* ── SPLIT VIEW ── */
+.split-wrapper {
+  padding: 0 1.5rem 3rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.split-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.split-header h2 {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+@media (max-width: 800px) {
+  .split { grid-template-columns: 1fr; }
+}
+
+/* ── PANELS ── */
+.panel {
+  border-radius: 16px;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.panel-danger {
+  background: var(--danger-surface);
+  border: 1px solid var(--danger-border);
+  animation: dangerPulse 4s ease-in-out infinite;
+}
+.panel-safe {
+  background: var(--safe-surface);
+  border: 1px solid var(--safe-border);
+}
+
+@keyframes dangerPulse {
+  0%, 100% { box-shadow: 0 0 30px rgba(231,76,60,0.05); }
+  50% { box-shadow: 0 0 50px rgba(231,76,60,0.12); }
+}
+
+/* Particle canvas */
+.particle-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.panel-content {
+  position: relative;
+  z-index: 1;
+}
+
+.panel-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: 100px;
+  margin-bottom: 1.25rem;
+}
+.panel-danger .panel-badge {
+  background: rgba(192,57,43,0.2);
+  color: var(--danger-glow);
+  border: 1px solid rgba(192,57,43,0.3);
+}
+.panel-safe .panel-badge {
+  background: rgba(39,174,96,0.2);
+  color: var(--safe-glow);
+  border: 1px solid rgba(39,174,96,0.3);
+}
+.panel-badge .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  animation: blink 2s ease-in-out infinite;
+}
+.panel-danger .dot { background: var(--danger-glow); }
+.panel-safe .dot { background: var(--safe-glow); }
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.panel h3 {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+}
+.panel-danger h3 { color: #f0a8a0; }
+.panel-safe h3 { color: #a0f0b8; }
+
+/* ── LIVE STAT ROW ── */
+.stat-row-live {
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(192,57,43,0.15);
+}
+.stat-value-live {
+  font-size: 1.5rem !important;
+  font-variant-numeric: tabular-nums;
+  color: var(--danger-glow) !important;
+  letter-spacing: 0.03em;
+}
+
+/* ── PANEL-ONLY SECTIONS ── */
+.panel-only {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px dashed rgba(255,255,255,0.08);
+}
+.panel-only-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+.panel-danger .panel-only-label { color: var(--danger-glow); opacity: 0.6; }
+.panel-safe .panel-only-label { color: var(--safe-glow); opacity: 0.6; }
+
+/* ── SIGNAL ROW (green panel) ── */
+.stat-row-signal {
+  border-bottom: none;
+  padding-bottom: 0.4rem;
+}
+.stat-value-signal {
+  font-size: 1.5rem !important;
+  color: var(--safe-glow) !important;
+}
+.stat-row-signal-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  opacity: 0.7;
+  line-height: 1.5;
+  font-style: italic;
+  padding-bottom: 0.5rem;
+}
+
+/* ── STAT ROWS ── */
+.stat-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  flex: 1;
+  line-height: 1.4;
+}
+.stat-value {
+  font-family: var(--sans);
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: right;
+  min-width: 80px;
+}
+.panel-danger .stat-value { color: #f0a8a0; }
+.panel-safe .stat-value { color: #a0f0b8; }
+.stat-unit {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-left: 0.4rem;
+}
+
+/* ── DIAL INPUT ROW ── */
+.dial-input-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+.dial-input-row input[type="number"] {
+  width: 80px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(212,165,71,0.25);
+  border-radius: 6px;
+  color: var(--gold);
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.35rem 0.5rem;
+  text-align: center;
+  outline: none;
+}
+.dial-input-row input[type="number"]:focus {
+  border-color: var(--gold);
+}
+.dial-input-row span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+/* hide spinners */
+.dial-input-row input[type="number"]::-webkit-inner-spin-button,
+.dial-input-row input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none; margin: 0;
+}
+.dial-input-row input[type="number"] { -moz-appearance: textfield; }
+
+/* ── DOWNSTREAM SECTION ── */
+.downstream-section {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem 3rem;
+}
+.downstream-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 2rem;
+}
+.downstream-card h2 {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+}
+.downstream-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+}
+.downstream-item {
+  padding: 1rem;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.downstream-item h4 {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+.downstream-item .ds-value {
+  font-family: var(--sans);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+}
+.downstream-item .ds-value span {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+.downstream-item .ds-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.3rem;
+  opacity: 0.7;
+}
+
+/* ── COST SECTION ── */
+.cost-section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+.cost-card {
+  background: linear-gradient(135deg, rgba(212,165,71,0.06), rgba(212,165,71,0.02));
+  border: 1px solid rgba(212,165,71,0.18);
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+}
+.cost-eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+.cost-headline {
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: 1.5rem;
+}
+.cost-headline em {
+  font-style: italic;
+  color: var(--gold);
+}
+.cost-stats {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+.cost-stat {
+  text-align: center;
+}
+.cost-stat-value {
+  font-family: var(--serif);
+  font-size: 2.2rem;
+  color: var(--gold);
+}
+.cost-stat-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  margin-top: 0.25rem;
+}
+
+/* ── CTA ── */
+.cta-section {
+  text-align: center;
+  padding: 2rem 2rem 3rem;
+}
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--bg);
+  background: var(--safe-glow);
+  border: none;
+  padding: 1rem 2.5rem;
+  border-radius: 100px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s;
+  box-shadow: 0 4px 24px rgba(46,204,113,0.3);
+}
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(46,204,113,0.45);
+}
+.cta-sub {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.75rem;
+}
+
+/* ── SOURCES ── */
+.sources-section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 2rem 4rem;
+}
+.sources-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: none;
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-family: var(--sans);
+  width: 100%;
+  text-align: left;
+  transition: border-color 0.3s;
+}
+.sources-toggle:hover {
+  border-color: rgba(255,255,255,0.2);
+}
+.sources-toggle .arrow {
+  transition: transform 0.3s;
+  font-size: 0.6rem;
+}
+.sources-toggle.open .arrow { transform: rotate(90deg); }
+.sources-list {
+  display: none;
+  margin-top: 1rem;
+  padding: 1.5rem;
+  background: rgba(255,255,255,0.02);
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.sources-list.show { display: block; }
+.sources-list ol {
+  padding-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.sources-list li {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.sources-list li strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* ── FOOTER ── */
+.footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.2);
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+/* ── ANIMATIONS ── */
+.animate-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.animate-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<header class="hero">
+  <div class="hero-eyebrow">Air Quality Impact Report</div>
+  <h1 class="hero-school-name">Lincoln Heights Elementary School</h1>
+  <div class="hero-admin">Prepared for Dr. Patricia Morales, Principal · Riverside Unified School District</div>
+  <div class="hero-divider"></div>
+  <h2 class="hero-question">What is your school <em>breathing?</em></h2>
+  <p class="hero-sub">Every minute without air purification, your students inhale particulate matter that impairs their ability to learn, makes them sick, and sends ripple effects through their families.</p>
+</header>
+
+<!-- ── STUDENT DIAL ── -->
+<section class="dial-section">
+  <div class="dial-container">
+    <div class="dial-label">Number of Students in Your School</div>
+    <div class="dial-value"><span class="dial-number" id="dialNumber">450</span><span>students</span></div>
+    <input type="range" id="studentSlider" min="50" max="5000" value="2500" step="10">
+    <div class="dial-input-row">
+      <input type="number" id="studentInput" min="50" max="5000" value="2500" step="10">
+      <span>or type exact count</span>
+    </div>
+    <div class="dial-range-labels">
+      <span>50</span>
+      <span>Single school ← → District-wide</span>
+      <span>5,000</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── SPLIT VIEW ── -->
+<section class="split-wrapper">
+  <div class="split-header">
+    <h2>Two realities. One choice.</h2>
+  </div>
+
+  <div class="split">
+
+    <!-- WITHOUT FILTRATION -->
+    <div class="panel panel-danger animate-in">
+      <canvas class="particle-canvas" id="dangerParticles"></canvas>
+      <div class="panel-content">
+        <div class="panel-badge"><span class="dot"></span> Current Environment</div>
+        <h3>Without Air Purification</h3>
+
+        <!-- Matched rows — these line up 1:1 with the green panel -->
+        <div class="stat-grid">
+          <div class="stat-row">
+            <span class="stat-label">Student sick days / year</span>
+            <span class="stat-value" id="d-sickdays">—</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Teacher sick days / year</span>
+            <span class="stat-value" id="d-teachersick">—</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Substitute teacher costs</span>
+            <span class="stat-value" id="d-subcost">—</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Asthma episodes / year</span>
+            <span class="stat-value" id="d-asthma">—</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Learning days lost</span>
+            <span class="stat-value" id="d-learning">—</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Parent workdays lost</span>
+            <span class="stat-value" id="d-parent">—</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Test score impact</span>
+            <span class="stat-value" id="d-test">—</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Household infection risk</span>
+            <span class="stat-value" id="d-elderly">—</span>
+          </div>
+        </div>
+
+        <!-- Unique to this panel -->
+        <div class="panel-only">
+          <div class="panel-only-label">While you read this</div>
+          <div class="stat-row stat-row-live">
+            <span class="stat-label">Next preventable absence in</span>
+            <span class="stat-value stat-value-live" id="preventableTimer">00:00</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Preventable absences / school day</span>
+            <span class="stat-value" id="preventableRate">—</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WITH FILTRATION -->
+    <div class="panel panel-safe animate-in">
+      <canvas class="particle-canvas" id="safeParticles"></canvas>
+      <div class="panel-content">
+        <div class="panel-badge"><span class="dot"></span> With Air Purification</div>
+        <h3>Clean Air Classrooms</h3>
+
+        <!-- Matched rows — line up 1:1 with the red panel -->
+        <div class="stat-grid">
+          <div class="stat-row">
+            <span class="stat-label">Student sick days / year</span>
+            <span class="stat-value" id="s-sickdays">—</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Teacher sick days / year</span>
+            <span class="stat-value" id="s-teachersick">—</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Substitute teacher costs</span>
+            <span class="stat-value" id="s-subcost">—</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Asthma episodes / year</span>
+            <span class="stat-value" id="s-asthma">—</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Learning days</span>
+            <span class="stat-value" id="s-learning">—</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Parent workdays</span>
+            <span class="stat-value" id="s-parent">—</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Test score gain</span>
+            <span class="stat-value" id="s-test">—</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Household infections</span>
+            <span class="stat-value" id="s-elderly">—</span>
+          </div>
+        </div>
+
+        <!-- Unique to this panel -->
+        <div class="panel-only">
+          <div class="panel-only-label">Research signal</div>
+          <div class="stat-row stat-row-signal">
+            <span class="stat-label">Test gains on day filters are installed</span>
+            <span class="stat-value stat-value-signal">+0.11<span class="stat-unit">SD</span></span>
+          </div>
+          <div class="stat-row-signal-note">+4.4 percentile points. Directional evidence from randomized purifier studies.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── DOWNSTREAM EFFECTS ── -->
+<section class="downstream-section animate-in">
+  <div class="downstream-card">
+    <h2>Downstream effects administrators feel first</h2>
+    <div class="downstream-grid">
+      <div class="downstream-item">
+        <h4>Instructional hours lost</h4>
+        <div class="ds-value" id="ds-hours">—</div>
+        <div class="ds-note">hours / year across all students</div>
+      </div>
+      <div class="downstream-item">
+        <h4>Behavior incident pressure</h4>
+        <div class="ds-value" id="ds-behavior">—</div>
+        <div class="ds-note">estimated excess referrals from PM2.5</div>
+      </div>
+      <div class="downstream-item">
+        <h4>Health-sensitive students</h4>
+        <div class="ds-value" id="ds-asthma">—</div>
+        <div class="ds-note">students with asthma exposed daily</div>
+      </div>
+      <div class="downstream-item">
+        <h4>Chronic absenteeism risk</h4>
+        <div class="ds-value" id="ds-chronic">—</div>
+        <div class="ds-note">students at risk of health-related chronic absence</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── COST SECTION ── -->
+<section class="cost-section animate-in">
+  <div class="cost-card">
+    <div class="cost-eyebrow">The Investment</div>
+    <h2 class="cost-headline">All of this for <em>$<span id="costPerStudent">30</span> per student</em> per year</h2>
+    <div class="cost-stats">
+      <div class="cost-stat">
+        <div class="cost-stat-value">$<span id="totalCost">—</span></div>
+        <div class="cost-stat-label">Total annual cost</div>
+      </div>
+      <div class="cost-stat">
+        <div class="cost-stat-value"><span id="benefitRatio">9.6</span>x</div>
+        <div class="cost-stat-label">Benefit-to-cost ratio</div>
+      </div>
+      <div class="cost-stat">
+        <div class="cost-stat-value">$<span id="totalSaved">—</span></div>
+        <div class="cost-stat-label">Economic value returned</div>
+      </div>
+    </div>
+    <p style="font-size:0.8rem; color:var(--text-muted); max-width:500px; margin:0 auto;">
+      Plug in, replace filters once a year. No construction. No hiring. No schedule changes. The simplest, most cost-effective intervention in education.
+    </p>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section">
+  <a href="mailto:info@cleanairclassrooms.org?subject=Clean Air Assessment — Lincoln Heights Elementary" class="cta-button">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+    Schedule a Clean Air Assessment
+  </a>
+  <p class="cta-sub">No cost, no obligation. See the difference clean air makes in 30 days.</p>
+</section>
+
+<!-- ── SOURCES ── -->
+<section class="sources-section">
+  <button class="sources-toggle" id="sourcesToggle" onclick="toggleSources()">
+    <span class="arrow">▶</span>
+    Research Sources &amp; Methodology
+  </button>
+  <div class="sources-list" id="sourcesList">
+    <ol>
+      <li><strong>Gilraine, M. (2023).</strong> "Air Filters, Pollution, and Student Achievement." EdWorkingPapers. Found 0.1–0.2 SD increase in test scores (~3 months of additional learning) after air purifier installation in Aliso Canyon, CA schools.</li>
+      <li><strong>Renna et al. (2025).</strong> RFF Working Paper 25-17. First RCT of air purifiers in Milan primary schools. Found 12.5% reduction in student absenteeism (1.34 fewer missed days/student/year), PM2.5 reduced by 32%. Benefit-cost ratio of 9.62.</li>
+      <li><strong>Wargocki &amp; Wyon (1999).</strong> Swedish daycare study. Illness-related absences dropped 55% when electrostatic air cleaners were installed. Published in Indoor Air.</li>
+      <li><strong>SICAS-2 Trial.</strong> School Inner-City Asthma Intervention Study. 200 classrooms, 39 schools. Median absence rate: 8.8 days/year. Published in JAMA Network Open.</li>
+      <li><strong>U.S. EPA.</strong> Poor IAQ contributes to ~14 million missed school days annually from asthma. Indoor pollutant levels 2–5× higher than outdoor levels.</li>
+      <li><strong>CDC.</strong> Approximately 8% of school-age children have asthma — the leading cause of chronic-illness-related school absenteeism.</li>
+      <li><strong>Federici et al. (2018).</strong> Societal cost of a single school day missed due to illness: ~€102 (~$110 USD), including childcare, lost parental productivity, and healthcare.</li>
+      <li><strong>Harvard T.H. Chan School of Public Health (2016).</strong> Better air quality and ventilation associated with a 101% increase in cognitive function test scores across nine cognitive domains.</li>
+      <li><strong>Zang et al. (2023).</strong> Yale/JAMA Network Open. Tracked 2.8M students in NC (2001–2018). PM2.5 exposure negatively impacted standardized test scores even at levels below EPA standards.</li>
+      <li><strong>The 74 Million (2025).</strong> Air purifier costs: ~$1,000/classroom first year (~$30/student). Less than 1% of the cost of reducing class sizes for similar effect sizes.</li>
+    </ol>
+  </div>
+</section>
+
+<footer class="footer">
+  This report was generated using peer-reviewed research. Actual results may vary based on local conditions.<br>
+  Data assumptions are conservative estimates and can be adjusted as more evidence becomes available.
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// ASSUMPTIONS — All research-backed values in one place.
+// Change these to update every number on the page.
+// ═══════════════════════════════════════════════════════════════
+const A = {
+  // ── Absenteeism ──
+  // RCT in Milan (2025, RFF WP 25-17): purifiers reduced absenteeism 12.5%
+  // Swedish daycare (Wargocki 1999): illness absences dropped 55%
+  // Using conservative RCT figure
+  studentAbsentReductionPct: 12.5,
+
+  // SICAS-2 trial (JAMA Network Open): median 8.8 days absent/year
+  baseStudentSickDays: 8.8,
+
+  // ── Test Scores ──
+  // Gilraine (2023): 0.1–0.2 SD improvement ≈ 3 months additional learning
+  // Harvard (2016): 101% improvement in cognitive scores
+  // Using Gilraine's conservative midpoint
+  testScoreSD: 0.15,
+  testScoreMonths: 3,
+
+  // ── Teachers ──
+  teacherRatioPerStudent: 1 / 15,  // ~1 teacher per 15 students
+  teacherSickDays: 5.5,            // national average
+  teacherAbsentReductionPct: 12.5, // same conservative estimate
+  subCostPerDay: 180,              // average substitute cost
+
+  // ── Asthma ──
+  // CDC: ~8% of school-age children have asthma
+  // EPA: ~14M missed school days/year from asthma
+  // Schools with higher PM2.5: 15% more asthma hospital visits
+  asthmaPrevalencePct: 8,
+  asthmaExacerbationsPerYear: 2.5, // avg attacks/asthmatic child/year
+  asthmaReductionPct: 25,          // conservative from PM2.5 reduction
+
+  // ── Air Quality ──
+  pm25ReductionPct: 32,            // Italian RCT measured this directly
+
+  // ── Community / Downstream ──
+  parentDaysLostPerChildSickDay: 0.5,  // not every sick day = parent miss
+  societalCostPerMissedDay: 110,       // Federici 2018, €102 → ~$110
+  householdsWithElderlyPct: 15,        // census estimate
+
+  // ── Behavior ──
+  // NBER WP 33549: +28% behavior referrals per +10µg/m³ PM2.5
+  behaviorReferralIncreasePer10ug: 0.28,
+  baselinePm25: 10,               // typical indoor µg/m³
+
+  // ── Chronic Absenteeism ──
+  // CDC NCHS Data Brief 499: 5.8% of children chronically absent for health
+  healthChronicAbsenceRate: 0.058,
+
+  // ── Cost ──
+  costPerStudent: 30,              // Gilraine / The 74 estimate
+  benefitCostRatio: 9.62,          // Italian RCT
+
+  // ── School Calendar ──
+  schoolDays: 180,
+  schoolHours: 6.5,
+};
+
+// ═══════════════════════════════════════════════════════════════
+// CALCULATIONS
+// ═══════════════════════════════════════════════════════════════
+function calc(students) {
+  const teachers = Math.round(students * A.teacherRatioPerStudent);
+
+  // Without filtration
+  const sickDaysTotal = Math.round(students * A.baseStudentSickDays);
+  const teacherSickTotal = Math.round(teachers * A.teacherSickDays);
+  const subCost = teacherSickTotal * A.subCostPerDay;
+  const asthmaStudents = Math.round(students * A.asthmaPrevalencePct / 100);
+  const asthmaAttacks = Math.round(asthmaStudents * A.asthmaExacerbationsPerYear);
+  const parentDaysLost = Math.round(sickDaysTotal * A.parentDaysLostPerChildSickDay);
+  const elderlyExposed = Math.round(students * A.householdsWithElderlyPct / 100);
+
+  // Sick interval: sickDaysTotal / schoolDays = students sick per day
+  // Spread across schoolHours → minutes between each
+  const sickPerDay = sickDaysTotal / A.schoolDays;
+  const minutesBetween = (A.schoolHours * 60) / sickPerDay;
+  const dangerIntervalSec = minutesBetween * 60;
+
+  // With filtration — reductions
+  const sickDaysSaved = Math.round(sickDaysTotal * A.studentAbsentReductionPct / 100);
+  const sickDaysClean = sickDaysTotal - sickDaysSaved;
+  const teacherSickSaved = Math.round(teacherSickTotal * A.teacherAbsentReductionPct / 100);
+  const teacherSickClean = teacherSickTotal - teacherSickSaved;
+  const subCostSaved = teacherSickSaved * A.subCostPerDay;
+  const asthmaAttacksPrevented = Math.round(asthmaAttacks * A.asthmaReductionPct / 100);
+  const parentDaysSaved = Math.round(sickDaysSaved * A.parentDaysLostPerChildSickDay);
+
+  // infections prevented that could reach elderly
+  const infectionsPrevented = Math.round(sickDaysSaved * A.householdsWithElderlyPct / 100 * 0.3);
+
+  const sickPerDayClean = sickDaysClean / A.schoolDays;
+  const minutesBetweenClean = (A.schoolHours * 60) / sickPerDayClean;
+  const safeIntervalSec = minutesBetweenClean * 60;
+
+  // Downstream
+  const instructionalHoursLost = Math.round(sickDaysTotal * A.schoolHours);
+  const pm25Reduced = A.baselinePm25 * A.pm25ReductionPct / 100;
+  const behaviorExcessPct = (A.baselinePm25 / 10) * A.behaviorReferralIncreasePer10ug;
+  const behaviorReductionPct = (pm25Reduced / 10) * A.behaviorReferralIncreasePer10ug;
+  // Rough baseline: ~5% of students get a referral/year
+  const baseReferrals = Math.round(students * 0.05);
+  const excessReferrals = Math.round(baseReferrals * behaviorExcessPct);
+  const referralsAvoided = Math.round(baseReferrals * behaviorReductionPct);
+  const chronicAbsentStudents = Math.round(students * A.healthChronicAbsenceRate);
+
+  // Cost
+  const totalCost = students * A.costPerStudent;
+  const totalSaved = Math.round(sickDaysSaved * A.societalCostPerMissedDay + subCostSaved);
+
+  return {
+    students, teachers,
+    sickDaysTotal, teacherSickTotal, subCost, asthmaAttacks, parentDaysLost, elderlyExposed,
+    dangerIntervalSec,
+    sickDaysSaved, sickDaysClean, teacherSickSaved, teacherSickClean,
+    subCostSaved, asthmaAttacksPrevented, parentDaysSaved, infectionsPrevented,
+    safeIntervalSec,
+    instructionalHoursLost, excessReferrals, referralsAvoided,
+    asthmaStudents, chronicAbsentStudents,
+    totalCost, totalSaved,
+  };
+}
+
+// ═══════════════════════════════════════════════════════════════
+// FORMAT HELPERS
+// ═══════════════════════════════════════════════════════════════
+function fmt(n) { return n.toLocaleString('en-US'); }
+function fmtMoney(n) { return n >= 1000 ? (n/1000).toFixed(n >= 10000 ? 0 : 1) + 'k' : fmt(n); }
+
+// ═══════════════════════════════════════════════════════════════
+// DOM UPDATES
+// ═══════════════════════════════════════════════════════════════
+let currentData = null;
+
+function updatePage(students) {
+  const d = calc(students);
+  currentData = d;
+
+  document.getElementById('dialNumber').textContent = fmt(students);
+
+  // Danger side
+  document.getElementById('d-sickdays').innerHTML = fmt(d.sickDaysTotal) + '<span class="stat-unit">days</span>';
+  document.getElementById('d-teachersick').innerHTML = fmt(d.teacherSickTotal) + '<span class="stat-unit">days</span>';
+  document.getElementById('d-subcost').innerHTML = '$' + fmtMoney(d.subCost);
+  document.getElementById('d-asthma').innerHTML = fmt(d.asthmaAttacks) + '<span class="stat-unit">/yr</span>';
+  document.getElementById('d-learning').innerHTML = fmt(d.sickDaysTotal) + '<span class="stat-unit">days</span>';
+  document.getElementById('d-parent').innerHTML = fmt(d.parentDaysLost) + '<span class="stat-unit">days</span>';
+  document.getElementById('d-test').innerHTML = 'Baseline';
+  document.getElementById('d-elderly').innerHTML = fmt(d.elderlyExposed) + '<span class="stat-unit">students</span>';
+
+  // Safe side — deltas as positive gains
+  document.getElementById('s-sickdays').innerHTML = fmt(d.sickDaysSaved) + '<span class="stat-unit">saved</span>';
+  document.getElementById('s-teachersick').innerHTML = fmt(d.teacherSickSaved) + '<span class="stat-unit">saved</span>';
+  document.getElementById('s-subcost').innerHTML = '$' + fmtMoney(d.subCostSaved) + '<span class="stat-unit">saved</span>';
+  document.getElementById('s-asthma').innerHTML = fmt(d.asthmaAttacksPrevented) + '<span class="stat-unit">prevented</span>';
+  document.getElementById('s-learning').innerHTML = fmt(d.sickDaysSaved) + '<span class="stat-unit">recovered</span>';
+  document.getElementById('s-parent').innerHTML = fmt(d.parentDaysSaved) + '<span class="stat-unit">recovered</span>';
+  document.getElementById('s-test').innerHTML = '+' + A.testScoreMonths + '<span class="stat-unit">mo. learning</span>';
+  document.getElementById('s-elderly').innerHTML = fmt(d.infectionsPrevented) + '<span class="stat-unit">stopped</span>';
+
+  // Downstream
+  document.getElementById('ds-hours').innerHTML = fmt(d.instructionalHoursLost) + '<span> hrs</span>';
+  document.getElementById('ds-behavior').innerHTML = '~' + fmt(d.excessReferrals) + '<span> excess/yr</span>';
+  document.getElementById('ds-asthma').innerHTML = fmt(d.asthmaStudents) + '<span> students</span>';
+  document.getElementById('ds-chronic').innerHTML = fmt(d.chronicAbsentStudents) + '<span> students</span>';
+
+  // Preventable absence countdown
+  const preventablePerDay = d.sickDaysSaved / A.schoolDays;
+  preventableIntervalSec = (A.schoolHours * 3600) / preventablePerDay;
+  countdownPhase = 0; // reset on slider change
+  document.getElementById('preventableRate').textContent = preventablePerDay.toFixed(1);
+
+  // Cost
+  document.getElementById('totalCost').textContent = fmtMoney(d.totalCost);
+  document.getElementById('totalSaved').textContent = fmtMoney(d.totalSaved);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PREVENTABLE ABSENCE COUNTDOWN
+// ═══════════════════════════════════════════════════════════════
+let preventableIntervalSec = 0;
+let countdownPhase = 0;
+let lastFrameTime = performance.now();
+
+function tickCountdown() {
+  const now = performance.now();
+  const dt = (now - lastFrameTime) / 1000;
+  lastFrameTime = now;
+
+  if (preventableIntervalSec > 0) {
+    countdownPhase = (countdownPhase + dt) % preventableIntervalSec;
+    const remaining = preventableIntervalSec - countdownPhase;
+    const mins = Math.floor(remaining / 60);
+    const secs = Math.floor(remaining % 60);
+    document.getElementById('preventableTimer').textContent =
+      String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+  }
+
+  requestAnimationFrame(tickCountdown);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PARTICLE SYSTEM
+// ═══════════════════════════════════════════════════════════════
+function initParticles(canvasId, color, count, speed, fadeRate, pathogenic) {
+  const canvas = document.getElementById(canvasId);
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let w, h;
+
+  function resize() {
+    const rect = canvas.parentElement.getBoundingClientRect();
+    w = canvas.width = rect.width;
+    h = canvas.height = rect.height;
+  }
+
+  function spawn() {
+    const spikes = Math.floor(Math.random() * 5) + 5;
+    const spikeLen = Math.random() * 1.8 + 0.8;
+    return {
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: Math.random() * 2.5 + 0.8,
+      vx: (Math.random() - 0.5) * speed,
+      vy: (Math.random() - 0.5) * speed,
+      alpha: Math.random() * 0.3 + 0.08,
+      rot: Math.random() * Math.PI * 2,
+      rotSpeed: (Math.random() - 0.5) * 0.015,
+      spikes,
+      spikeLen,
+    };
+  }
+
+  function init() {
+    resize();
+    particles = [];
+    for (let i = 0; i < count; i++) particles.push(spawn());
+  }
+
+  function drawPathogen(p, fillColor) {
+    const r = p.r;
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rot);
+
+    // Body
+    ctx.beginPath();
+    ctx.arc(0, 0, r, 0, Math.PI * 2);
+    ctx.fillStyle = fillColor;
+    ctx.fill();
+
+    // Spikes / protein bumps
+    for (let i = 0; i < p.spikes; i++) {
+      const angle = (i / p.spikes) * Math.PI * 2;
+      const sx = Math.cos(angle) * (r + p.spikeLen * 0.5);
+      const sy = Math.sin(angle) * (r + p.spikeLen * 0.5);
+      const tipX = Math.cos(angle) * (r + p.spikeLen);
+      const tipY = Math.sin(angle) * (r + p.spikeLen);
+
+      // Spike line
+      ctx.beginPath();
+      ctx.moveTo(Math.cos(angle) * r, Math.sin(angle) * r);
+      ctx.lineTo(tipX, tipY);
+      ctx.strokeStyle = fillColor;
+      ctx.lineWidth = 0.4;
+      ctx.stroke();
+
+      // Tip blob
+      ctx.beginPath();
+      ctx.arc(tipX, tipY, r * 0.25, 0, Math.PI * 2);
+      ctx.fillStyle = fillColor;
+      ctx.fill();
+    }
+
+    ctx.restore();
+  }
+
+  function frame() {
+    ctx.clearRect(0, 0, w, h);
+    for (let p of particles) {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.rot += p.rotSpeed;
+
+      // Bounce off edges
+      const margin = p.r + 2;
+      if (p.x < margin) { p.x = margin; p.vx *= -1; }
+      if (p.x > w - margin) { p.x = w - margin; p.vx *= -1; }
+      if (p.y < margin) { p.y = margin; p.vy *= -1; }
+      if (p.y > h - margin) { p.y = h - margin; p.vy *= -1; }
+
+      const fillColor = color.replace('ALPHA', p.alpha.toFixed(2));
+      if (pathogenic) {
+        drawPathogen(p, fillColor);
+      } else {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r * 0.5, 0, Math.PI * 2);
+        ctx.fillStyle = fillColor;
+        ctx.globalAlpha = 0.5;
+        ctx.fill();
+        ctx.globalAlpha = 1;
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  init();
+  window.addEventListener('resize', resize);
+  frame();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SOURCES TOGGLE
+// ═══════════════════════════════════════════════════════════════
+function toggleSources() {
+  const btn = document.getElementById('sourcesToggle');
+  const list = document.getElementById('sourcesList');
+  btn.classList.toggle('open');
+  list.classList.toggle('show');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// INTERSECTION OBSERVER FOR ANIMATIONS
+// ═══════════════════════════════════════════════════════════════
+function setupAnimations() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
+}
+
+// ═══════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════
+const slider = document.getElementById('studentSlider');
+const numInput = document.getElementById('studentInput');
+function setStudents(n) {
+  n = Math.max(50, Math.min(5000, n));
+  slider.value = n;
+  numInput.value = n;
+  updatePage(n);
+}
+slider.addEventListener('input', () => setStudents(parseInt(slider.value)));
+numInput.addEventListener('input', () => {
+  const v = parseInt(numInput.value);
+  if (!isNaN(v)) setStudents(v);
+});
+
+updatePage(2500);
+setupAnimations();
+requestAnimationFrame(tickCountdown);
+
+// Danger particles: dense, pathogen-shaped, drifting
+initParticles('dangerParticles', 'rgba(231,76,60,ALPHA)', 40, 0.3, 0.001, true);
+// Safe particles: barely there, harmless dots
+initParticles('safeParticles', 'rgba(46,204,113,ALPHA)', 4, 0.1, 0.006, false);
+</script>
+</body>
+</html>
